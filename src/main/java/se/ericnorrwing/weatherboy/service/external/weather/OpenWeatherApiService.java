@@ -1,15 +1,15 @@
-package se.ericnorrwing.weatherboy.service.external;
+package se.ericnorrwing.weatherboy.service.external.weather;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Service
-public class WeatherService {
+public class OpenWeatherApiService implements WeatherApi {
 
     private final WebClient webClient;
 
-    public WeatherService(WebClient.Builder webClientBuilder) {
+    public OpenWeatherApiService(WebClient.Builder webClientBuilder) {
         this.webClient = webClientBuilder
                 .baseUrl("https://api.openweathermap.org")
                 .build();

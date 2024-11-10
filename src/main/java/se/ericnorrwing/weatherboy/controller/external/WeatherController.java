@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
-import se.ericnorrwing.weatherboy.service.external.WeatherService;
+import se.ericnorrwing.weatherboy.service.external.weather.OpenWeatherApiService;
 
 @RestController
 public class WeatherController {
 
 
     //TODO BOILERPLATE
-    private final WeatherService weatherService;
+    private final OpenWeatherApiService weatherService;
 
     @Autowired
-    public WeatherController(WeatherService weatherService) {
+    public WeatherController(OpenWeatherApiService weatherService) {
         this.weatherService = weatherService;
     }
 
