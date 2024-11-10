@@ -18,5 +18,8 @@ public record Response(@JsonProperty("visibility") int visibilityInMeters, int t
 					   @JsonProperty("cod") int httpStatusCode,
 					   int id,
 					   @JsonProperty("base") String base,
-					   Wind wind
+					   Wind wind,
+					   Rain rain,
+					   Snow snow
+
 ) {}
