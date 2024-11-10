@@ -27,6 +27,9 @@ dependencies {
     //Jackson DateTime Deserializer
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2'
 
+    //Jackson GEO Datatypes (Java Topology Suite with Jackson)
+    implementation 'org.n52.jackson:jackson-datatype-jts:1.2.4'
+
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
