@@ -15,7 +15,7 @@ public record Response(@JsonProperty("visibility") int visibilityInMeters, int t
 					   @JsonProperty("coord") Coordinate coordinate,
 					   @JsonProperty("weather") List<WeatherItem> weather,
 					   String name,
-					   @JsonProperty("cod") int cod,
+					   @JsonProperty("cod") int httpStatusCode,
 					   int id,
 					   @JsonProperty("base") String base,
 					   Wind wind

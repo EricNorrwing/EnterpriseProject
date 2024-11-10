@@ -2,30 +2,13 @@ package se.ericnorrwing.weatherboy.model.external;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record BasicWeatherInformation(
-
-	@JsonProperty("temp")
-	Object temp,
-
-	@JsonProperty("temp_min")
-	Object tempMin,
-
-	@JsonProperty("grnd_level")
-	int grndLevel,
-
-	@JsonProperty("humidity")
-	int humidity,
-
-	@JsonProperty("pressure")
-	int pressure,
-
-	@JsonProperty("sea_level")
-	int seaLevel,
-
-	@JsonProperty("feels_like")
-	Object feelsLike,
-
-	@JsonProperty("temp_max")
-	Object tempMax
-) {
-}
+//TODO Sealevel pressure is most likely a copy of pressure
+public record BasicWeatherInformation(@JsonProperty("temp") Temperature temperature,
+									  @JsonProperty("temp_min") Temperature temperatureMinimum,
+									  @JsonProperty("grnd_level") int atmosphericPressureAtGroundLevel,
+									  @JsonProperty("humidity") double humidityInPercent,
+									  @JsonProperty("pressure") int pressureAtSeaLevel,
+									  @JsonProperty("sea_level") int atmosphericPressureAtSeaLevel,
+									  @JsonProperty("feels_like") Temperature feelsLike,
+									  @JsonProperty("temp_max") Temperature tempMax
+) {}
