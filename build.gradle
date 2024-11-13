@@ -31,7 +31,6 @@ dependencies {
     implementation 'org.n52.jackson:jackson-datatype-jts:1.2.4'
 
     implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '3.3.5'
-    implementation
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
