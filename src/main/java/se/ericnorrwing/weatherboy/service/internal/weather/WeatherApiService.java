@@ -1,4 +1,7 @@
 package se.ericnorrwing.weatherboy.service.internal.weather;
 
-public interface WeatherApiService {
+import org.springframework.stereotype.Service;
+
+@Service
+public class WeatherApiService implements InternalWeatherApiService {
 }

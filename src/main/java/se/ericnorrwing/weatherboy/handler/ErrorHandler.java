@@ -9,11 +9,12 @@ import org.springframework.web.reactive.result.method.annotation.ResponseEntityE
 
 import java.util.Map;
 import java.util.Objects;
-
+/*
 @RestControllerAdvice
 public class ErrorHandler extends ResponseEntityExceptionHandler {
 
     //TODO
+
     @ExceptionHandler(MyException.class)
     protected ProblemDetail handleConflict (MyException e, WebRequest request ) {
         ProblemDetail problemDetail
@@ -34,3 +35,5 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
         return problemDetail;
     }
 }
+*/
+
