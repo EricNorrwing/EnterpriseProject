@@ -18,9 +18,11 @@ public class ExternalLocationApiService implements ExternalLocationService {
         this.notionConfigProperties = notionConfigProperties;
     }
 
+
     @Override
     public Flux<ResponseItem> getLocationByName(String cityName) {
-        String apiKey = notionConfigProperties.externalWeatherApiKey();
-        return externalLocationClient.getLocation(cityName, apiKey);
+        return externalLocationClient.getLocation(cityName,1,  notionConfigProperties.externalWeatherApiKey());
     }
+
+
 }

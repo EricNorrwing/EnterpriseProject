@@ -20,9 +20,10 @@ public class WeatherController {
     private final ExternalLocationService externalLocationService;
     private final NotionConfigProperties notionConfigProperties;
 
-    public WeatherController(ExternalLocationService externalLocationService, NotionConfigProperties notionConfigProperties) {
+
+    public WeatherController(ExternalLocationService externalLocationService, NotionConfigProperties notionConfigProperties, NotionConfigProperties notionConfigProperties1) {
         this.externalLocationService = externalLocationService;
-        this.notionConfigProperties = notionConfigProperties;
+        this.notionConfigProperties = notionConfigProperties1;
     }
 
     @GetMapping("/location")
@@ -30,10 +31,5 @@ public class WeatherController {
         return externalLocationService.getLocationByName(cityName);
     }
 
-    @GetMapping("/test")
-    public Map<String, String> printAllProps() {
-        return Map.of("WEATHER_API_BASE_URL", notionConfigProperties.weatherApiBaseUrl(),
-                "WEATHER_API_KEY", notionConfigProperties.externalWeatherApiKey());
-    }
 }
 
