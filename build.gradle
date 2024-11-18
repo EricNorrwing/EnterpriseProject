@@ -42,8 +42,8 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    //Env files
-    implementation "me.paulschwarz:spring-dotenv:4.0.0"
+    //Config Properties
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
 }
 
 tasks.named('test') {

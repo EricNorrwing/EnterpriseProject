@@ -6,21 +6,21 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 import se.ericnorrwing.weatherboy.configuration.client.ExternalLocationClient;
-import se.ericnorrwing.weatherboy.service.internal.keys.EnvService;
+import se.ericnorrwing.weatherboy.notionsecrets.NotionConfigProperties;
 
 @Configuration
 public class WebClientConfiguration {
 
-    private final EnvService keyService;
+    private final NotionConfigProperties notionConfigProperties;
 
-    public WebClientConfiguration(EnvService keyService) {
-        this.keyService = keyService;
+    public WebClientConfiguration(NotionConfigProperties notionConfigProperties) {
+        this.notionConfigProperties = notionConfigProperties;
     }
 
     @Bean
     public WebClient client(WebClient.Builder builder) {
         return builder
-                .baseUrl(keyService.getWeatherApiBaseUrl())
+                .baseUrl(notionConfigProperties.weatherApiBaseUrl())
                 .build();
     }
 
