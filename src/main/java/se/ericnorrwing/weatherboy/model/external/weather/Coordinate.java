@@ -1,4 +1,4 @@
-package se.ericnorrwing.weatherboy.model.external;
+package se.ericnorrwing.weatherboy.model.external.weather;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.locationtech.jts.geom.Point;

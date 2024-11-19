@@ -1,6 +1,4 @@
-package se.ericnorrwing.weatherboy.model.external.response;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package se.ericnorrwing.weatherboy.model.external.location;
 
 public record LocalNames(
 		String tt,

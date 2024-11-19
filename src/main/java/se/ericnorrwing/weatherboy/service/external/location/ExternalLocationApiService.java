@@ -3,7 +3,7 @@ package se.ericnorrwing.weatherboy.service.external.location;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import se.ericnorrwing.weatherboy.configuration.client.ExternalLocationClient;
-import se.ericnorrwing.weatherboy.model.external.response.ResponseItem;
+import se.ericnorrwing.weatherboy.model.external.location.ResponseItem;
 import se.ericnorrwing.weatherboy.notionsecrets.NotionConfigProperties;
 
 @Service

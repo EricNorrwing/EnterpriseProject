@@ -7,11 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
-import se.ericnorrwing.weatherboy.model.external.response.ResponseItem;
+import se.ericnorrwing.weatherboy.model.external.location.ResponseItem;
 import se.ericnorrwing.weatherboy.notionsecrets.NotionConfigProperties;
 import se.ericnorrwing.weatherboy.service.external.location.ExternalLocationService;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api")

@@ -1,4 +1,4 @@
-package se.ericnorrwing.weatherboy.model.external;
+package se.ericnorrwing.weatherboy.model.external.weather;
 
 public record WeatherItem(String icon, String description,  String main, int id) {}
 

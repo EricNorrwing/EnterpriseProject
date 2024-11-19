@@ -1,4 +1,4 @@
-package se.ericnorrwing.weatherboy.model.external.response;
+package se.ericnorrwing.weatherboy.model.external.location;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

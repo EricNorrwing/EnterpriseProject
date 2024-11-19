@@ -1,6 +1,5 @@
-package se.ericnorrwing.weatherboy.model.external.response;
+package se.ericnorrwing.weatherboy.model.external.location;
 
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import reactor.core.publisher.Flux;
 

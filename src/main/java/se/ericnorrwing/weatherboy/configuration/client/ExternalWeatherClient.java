@@ -6,13 +6,12 @@ import org.springframework.web.service.annotation.HttpExchange;
 import reactor.core.publisher.Flux;
 import se.ericnorrwing.weatherboy.model.external.location.ResponseItem;
 
-
 @HttpExchange
-public interface ExternalLocationClient {
+public interface ExternalWeatherClient {
+
+    //TODO Fix weatherClient
     @GetExchange("/direct")
-    Flux<ResponseItem> getLocation(@RequestParam("q") String city,
-                                   @RequestParam("limit") int limit,
-                                   @RequestParam("appid") String apiKey);
-
-
+    Flux<ResponseItem> getWeatherByLocation(@RequestParam("lat") double lat,
+                                            @RequestParam("lon") double lon,
+                                            @RequestParam("appid") String apiKey);
 }
