@@ -14,7 +14,6 @@ public class ExternalLocationApiService implements ExternalLocationService {
 
     public ExternalLocationApiService(ExternalLocationClient externalLocationClient, NotionConfigProperties notionConfigProperties) {
         this.externalLocationClient = externalLocationClient;
-
         this.notionConfigProperties = notionConfigProperties;
     }
 
