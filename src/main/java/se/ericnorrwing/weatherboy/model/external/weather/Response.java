@@ -13,7 +13,7 @@ public record Response(@JsonProperty("visibility") int visibilityInMeters, int t
 					   @JsonProperty("sys") ApiParameters apiParameters,
 					   @JsonProperty("dt") Instant timeOfWeatherCalculation,
 					   @JsonProperty("coord") Coordinate coordinate,
-					   @JsonProperty("weather") List<WeatherItem> weather,
+					   @JsonProperty("weather") List<WeatherDetails> weather,
 					   String name,
 					   @JsonProperty("cod") int httpStatusCode,
 					   int id,

@@ -2,7 +2,7 @@ package se.ericnorrwing.weatherboy.model.external.location;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record ResponseItem(
+public record LocationDetails(
 		@JsonProperty("local_names")
 		LocalNames localCityNames,
 		@JsonProperty("country")

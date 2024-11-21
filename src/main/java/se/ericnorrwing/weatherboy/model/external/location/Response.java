@@ -6,6 +6,6 @@ import reactor.core.publisher.Flux;
 public record Response(
 
 	@JsonProperty("Response")
-	Flux<ResponseItem> response
+	Flux<LocationDetails> response
 ) {
 }

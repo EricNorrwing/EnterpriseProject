@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
-import se.ericnorrwing.weatherboy.model.external.location.ResponseItem;
+import se.ericnorrwing.weatherboy.model.external.location.LocationDetails;
 import se.ericnorrwing.weatherboy.notionsecrets.NotionConfigProperties;
 import se.ericnorrwing.weatherboy.service.external.location.ExternalLocationService;
 
@@ -25,7 +25,7 @@ public class WeatherController {
     }
 
     @GetMapping("/location")
-    public Flux<ResponseItem> getLocationByName(@RequestParam String cityName) {
+    public Flux<LocationDetails> getLocationByName(@RequestParam String cityName) {
         return externalLocationService.getLocationByName(cityName);
     }
 

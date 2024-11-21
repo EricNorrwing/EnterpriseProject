@@ -3,7 +3,7 @@ package se.ericnorrwing.weatherboy.service.external.location;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import se.ericnorrwing.weatherboy.configuration.client.ExternalLocationClient;
-import se.ericnorrwing.weatherboy.model.external.location.ResponseItem;
+import se.ericnorrwing.weatherboy.model.external.location.LocationDetails;
 import se.ericnorrwing.weatherboy.notionsecrets.NotionConfigProperties;
 
 @Service
@@ -19,7 +19,7 @@ public class ExternalLocationApiService implements ExternalLocationService {
 
 
     @Override
-    public Flux<ResponseItem> getLocationByName(String cityName) {
+    public Flux<LocationDetails> getLocationByName(String cityName) {
         return externalLocationClient.getLocation(cityName,1,  notionConfigProperties.externalWeatherApiKey());
     }
 
