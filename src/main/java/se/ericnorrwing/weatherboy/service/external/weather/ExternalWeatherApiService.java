@@ -1,5 +1,6 @@
 package se.ericnorrwing.weatherboy.service.external.weather;
 
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import se.ericnorrwing.weatherboy.configuration.client.ExternalWeatherClient;
 import se.ericnorrwing.weatherboy.model.external.location.LocationDetails;
@@ -8,6 +9,7 @@ import se.ericnorrwing.weatherboy.model.external.weather.WeatherDetails;
 import se.ericnorrwing.weatherboy.notionsecrets.NotionConfigProperties;
 import se.ericnorrwing.weatherboy.service.external.location.ExternalLocationService;
 
+@Service
 public class ExternalWeatherApiService implements ExternalWeatherService {
 
     private final ExternalWeatherClient externalWeatherClient;
@@ -24,10 +26,18 @@ public class ExternalWeatherApiService implements ExternalWeatherService {
 
     @Override
     public Flux<WeatherDetails> getWeatherByLocationName(String cityName) {
-        return externalWeatherClient.getWeatherByLocation(externalLocationService.getLocationByName(cityName).
-                map(locationDetails -> new LocationDTO(
+        Flux<LocationDetails> locationDetailsFlux = externalLocationService.getLocationByName(cityName);
+
+        return locationDetailsFlux
+                .map(locationDetails -> new LocationDTO(
                         locationDetails.name(),
                         locationDetails.latitude(),
-                        locationDetails.longitude())));
+                        locationDetails.longitude()
+                ))
+                .flatMap(locationDTO -> externalWeatherClient.getWeatherByLocation(
+                        locationDTO.getLatitude(),
+                        locationDTO.getLongitude(),
+                        notionConfigProperties.externalWeatherApiKey()
+                ));
     }
 }
