@@ -1,0 +1,32 @@
+package se.ericnorrwing.weatherboy.externalResponse;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.test.web.servlet.MockMvc;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+public class WeatherControllerTest {
+
+    //TODO Fix by adding users
+    @Autowired
+    private WebTestClient webTestClient;
+
+    @Test
+    void testGetWeather() {
+        webTestClient.get()
+                .uri("/api/weather")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.name").isEqualTo("Zocca")
+                .jsonPath("$.main.temp").isNotEmpty();
+    }
+}
