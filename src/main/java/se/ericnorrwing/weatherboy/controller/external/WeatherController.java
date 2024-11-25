@@ -38,10 +38,8 @@ public class WeatherController {
         return externalWeatherService.getWeatherByLocationName(cityName);
     }
 
-    @GetMapping("/test")
-    public String welcome(OAuth2AuthenticationToken authentication){
-        return (String) authentication.getPrincipal().getAttributes().get("login");
-    }
+
+
 
 }
 
