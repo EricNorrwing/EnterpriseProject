@@ -2,6 +2,8 @@ package se.ericnorrwing.weatherboy.controller.external;
 
 
 
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,13 +21,11 @@ public class WeatherController {
 
     private final ExternalLocationService externalLocationService;
     private final ExternalWeatherService externalWeatherService;
-    private final NotionConfigProperties notionConfigProperties;
 
 
-    public WeatherController(ExternalLocationService externalLocationService, NotionConfigProperties notionConfigProperties, ExternalWeatherService externalWeatherService, NotionConfigProperties notionConfigProperties1) {
+    public WeatherController(ExternalLocationService externalLocationService, ExternalWeatherService externalWeatherService) {
         this.externalLocationService = externalLocationService;
         this.externalWeatherService = externalWeatherService;
-        this.notionConfigProperties = notionConfigProperties1;
     }
 
     @GetMapping("/location")
@@ -36,6 +36,11 @@ public class WeatherController {
     @GetMapping("/weather")
     public Flux<WeatherDetails> getWeatherByLocation(@RequestParam String cityName) {
         return externalWeatherService.getWeatherByLocationName(cityName);
+    }
+
+    @GetMapping("/test")
+    public String welcome(OAuth2AuthenticationToken authentication){
+        return (String) authentication.getPrincipal().getAttributes().get("login");
     }
 
 }

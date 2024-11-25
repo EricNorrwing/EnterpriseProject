@@ -43,6 +43,9 @@ dependencies {
 
     //Config Properties
     implementation 'org.springframework.boot:spring-boot-configuration-processor'
+
+    //Oath2
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 }
 
 tasks.named('test') {
