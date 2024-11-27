@@ -2,6 +2,7 @@ package se.ericnorrwing.weatherboy.controller.external;
 
 
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,6 +38,7 @@ public class WeatherController {
     }
 
     @GetMapping("/test")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Flux<WeatherDetails> getTestWeather() {
         return externalWeatherService.getWeatherByLocationName("Stockholm");
     }
