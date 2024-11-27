@@ -4,15 +4,15 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import se.ericnorrwing.weatherboy.configuration.client.ExternalLocationClient;
 import se.ericnorrwing.weatherboy.model.external.location.LocationDetails;
-import se.ericnorrwing.weatherboy.notionsecrets.NotionConfigProperties;
+import se.ericnorrwing.weatherboy.notionsecrets.ConfigProperties;
 
 @Service
 public class ExternalLocationApiService implements ExternalLocationService {
 
     private final ExternalLocationClient externalLocationClient;
-    private final NotionConfigProperties notionConfigProperties;
+    private final ConfigProperties notionConfigProperties;
 
-    public ExternalLocationApiService(ExternalLocationClient externalLocationClient, NotionConfigProperties notionConfigProperties) {
+    public ExternalLocationApiService(ExternalLocationClient externalLocationClient, ConfigProperties notionConfigProperties) {
         this.externalLocationClient = externalLocationClient;
         this.notionConfigProperties = notionConfigProperties;
     }

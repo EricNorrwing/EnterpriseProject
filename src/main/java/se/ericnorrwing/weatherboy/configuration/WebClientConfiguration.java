@@ -8,14 +8,14 @@ import org.springframework.web.reactive.function.client.support.WebClientAdapter
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 import se.ericnorrwing.weatherboy.configuration.client.ExternalLocationClient;
 import se.ericnorrwing.weatherboy.configuration.client.ExternalWeatherClient;
-import se.ericnorrwing.weatherboy.notionsecrets.NotionConfigProperties;
+import se.ericnorrwing.weatherboy.notionsecrets.ConfigProperties;
 
 @Configuration
 public class WebClientConfiguration {
 
-    private final NotionConfigProperties notionConfigProperties;
+    private final ConfigProperties notionConfigProperties;
 
-    public WebClientConfiguration(NotionConfigProperties notionConfigProperties) {
+    public WebClientConfiguration(ConfigProperties notionConfigProperties) {
         this.notionConfigProperties = notionConfigProperties;
     }
 

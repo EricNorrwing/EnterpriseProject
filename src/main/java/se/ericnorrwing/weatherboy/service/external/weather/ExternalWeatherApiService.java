@@ -6,7 +6,7 @@ import se.ericnorrwing.weatherboy.configuration.client.ExternalWeatherClient;
 import se.ericnorrwing.weatherboy.model.external.location.LocationDetails;
 import se.ericnorrwing.weatherboy.model.external.location.dto.LocationDTO;
 import se.ericnorrwing.weatherboy.model.external.weather.WeatherDetails;
-import se.ericnorrwing.weatherboy.notionsecrets.NotionConfigProperties;
+import se.ericnorrwing.weatherboy.notionsecrets.ConfigProperties;
 import se.ericnorrwing.weatherboy.service.external.location.ExternalLocationService;
 
 @Service
@@ -14,9 +14,9 @@ public class ExternalWeatherApiService implements ExternalWeatherService {
 
     private final ExternalWeatherClient externalWeatherClient;
     private final ExternalLocationService externalLocationService;
-    private final NotionConfigProperties notionConfigProperties;
+    private final ConfigProperties notionConfigProperties;
 
-    public ExternalWeatherApiService(ExternalWeatherClient externalWeatherClient, ExternalLocationService externalLocationService, NotionConfigProperties notionConfigProperties) {
+    public ExternalWeatherApiService(ExternalWeatherClient externalWeatherClient, ExternalLocationService externalLocationService, ConfigProperties notionConfigProperties) {
         this.externalWeatherClient = externalWeatherClient;
         this.externalLocationService = externalLocationService;
         this.notionConfigProperties = notionConfigProperties;
