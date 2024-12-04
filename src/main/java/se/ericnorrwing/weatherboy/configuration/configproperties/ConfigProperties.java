@@ -1,4 +1,4 @@
-package se.ericnorrwing.weatherboy.notionsecrets;
+package se.ericnorrwing.weatherboy.configuration.configproperties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -9,7 +9,5 @@ public record ConfigProperties(
         String externalWeatherApiKey,
         String postGresUsername,
         String postGresPassword,
-        String postGresDBName,
-        String githubClientId,
-        String githubSecret
+        String postGresDBName
 ) {}

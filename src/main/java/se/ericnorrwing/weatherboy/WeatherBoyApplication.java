@@ -3,7 +3,7 @@ package se.ericnorrwing.weatherboy;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import se.ericnorrwing.weatherboy.notionsecrets.ConfigProperties;
+import se.ericnorrwing.weatherboy.configuration.configproperties.ConfigProperties;
 
 //WOULDN'T YOU LIKE TO KNOW
 @SpringBootApplication

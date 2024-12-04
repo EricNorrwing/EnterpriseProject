@@ -6,7 +6,7 @@ import se.ericnorrwing.weatherboy.configuration.client.ExternalWeatherClient;
 import se.ericnorrwing.weatherboy.model.external.location.LocationDetails;
 import se.ericnorrwing.weatherboy.model.external.location.dto.LocationDTO;
 import se.ericnorrwing.weatherboy.model.external.weather.WeatherDetails;
-import se.ericnorrwing.weatherboy.notionsecrets.ConfigProperties;
+import se.ericnorrwing.weatherboy.configuration.configproperties.ConfigProperties;
 import se.ericnorrwing.weatherboy.service.external.location.ExternalLocationService;
 
 @Service

@@ -46,9 +46,6 @@ dependencies {
     // Configuration properties
     implementation 'org.springframework.boot:spring-boot-configuration-processor'
 
-    // OAuth2 support
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-
     // Entity validation
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 }

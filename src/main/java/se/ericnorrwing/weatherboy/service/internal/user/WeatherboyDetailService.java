@@ -1,5 +1,6 @@
 package se.ericnorrwing.weatherboy.service.internal.user;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,7 +12,7 @@ public class WeatherboyDetailService implements UserDetailsService {
 
     private final UserService userService;
 
-    public WeatherboyDetailService(UserService userService) {
+    public WeatherboyDetailService(UserService userService) {  // Lazy initialization here
         this.userService = userService;
     }
 

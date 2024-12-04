@@ -2,7 +2,9 @@ package se.ericnorrwing.weatherboy.controller.external;
 
 
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,19 +30,27 @@ public class WeatherController {
     }
 
     @GetMapping("/location")
-    public Flux<LocationDetails> getLocationByName(@RequestParam String cityName) {
-        return externalLocationService.getLocationByName(cityName);
+    public ResponseEntity<Flux<LocationDetails>> getLocationByName(@RequestParam String cityName) {
+        Flux<LocationDetails> locationDetails = externalLocationService.getLocationByName(cityName);
+        return ResponseEntity.ok(locationDetails);
     }
 
     @GetMapping("/weather")
-    public Flux<WeatherDetails> getWeatherByLocation(@RequestParam String cityName) {
-        return externalWeatherService.getWeatherByLocationName(cityName);
+    public ResponseEntity<Flux<WeatherDetails>> getWeatherByLocation(@RequestParam String cityName) {
+        Flux<WeatherDetails> weatherDetails = externalWeatherService.getWeatherByLocationName(cityName);
+        return ResponseEntity.ok(weatherDetails);
     }
 
     @GetMapping("/test")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Flux<WeatherDetails> getTestWeather() {
         return externalWeatherService.getWeatherByLocationName("Stockholm");
+    }
+
+    @GetMapping("/test/user")
+    @PreAuthorize("hasRole('SCOPE_read:user')")
+    public String testUsers (Authentication authentication) {
+        return authentication.getAuthorities().toString();
     }
 
 

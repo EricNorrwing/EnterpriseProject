@@ -1,20 +1,16 @@
 package se.ericnorrwing.weatherboy.model.internal;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
+
 
 @Entity
 @Setter
@@ -23,16 +19,16 @@ import java.util.Set;
 @NoArgsConstructor
 public class User {
 
-    @Builder
-    public User(String username) {
-        this.username = username;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @Column(nullable = false, unique = true)
     private String username;
+
+    @Column(nullable = false)
+    @Size(min = 8, message = "Password must be at least 8 characters long")
+    private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -42,4 +38,11 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
 
+    @Builder
+    public User(String username, String password, Set<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles != null ? roles : new HashSet<>();
+    }
 }
+

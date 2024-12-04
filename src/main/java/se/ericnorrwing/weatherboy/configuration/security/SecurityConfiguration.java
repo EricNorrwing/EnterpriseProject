@@ -8,12 +8,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
-import se.ericnorrwing.weatherboy.service.internal.user.RoleService;
-import se.ericnorrwing.weatherboy.service.internal.user.UserService;
 
 
 @EnableWebSecurity
@@ -21,39 +20,34 @@ import se.ericnorrwing.weatherboy.service.internal.user.UserService;
 @EnableMethodSecurity
 public class SecurityConfiguration {
 
-    private final UserService userService;
-    private final RoleService roleService;
     private final UserDetailsService userDetailsService;
 
-    public SecurityConfiguration(UserService userService, RoleService roleService, UserDetailsService userDetailsService) {
-        this.userService = userService;
-        this.roleService = roleService;
+    public SecurityConfiguration(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
-    }
-
-    @Bean
-    public AuthenticationSuccessHandler successHandler() {
-
-        return new OAuth2LoginSuccessHandler(userService, roleService, userDetailService);
     }
 
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/").hasAnyAuthority("USER", "ADMIN")
-                                .requestMatchers("/api/test").hasAuthority("USER")
-                                .anyRequest()
-                                .authenticated()
+                                .requestMatchers("/user/create", "/user/test").permitAll()
+                                .anyRequest().authenticated()
                 )
-                .userDetailsService(userDetailsService)
-                .oauth2Login(oauth2Login ->
-                        oauth2Login
-                                .successHandler(successHandler()));
+                .formLogin(formLogin ->
+                        formLogin
+                                .defaultSuccessUrl("/api/test")
+                )
+                .userDetailsService(userDetailsService);
+
+
         return http.build();
     }
 
-
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 }
