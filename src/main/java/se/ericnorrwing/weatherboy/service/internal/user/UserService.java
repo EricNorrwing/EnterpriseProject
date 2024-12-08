@@ -55,50 +55,33 @@ public class UserService {
         User newUser = new User();
         newUser.setUsername(username);
         newUser.setPassword(passwordEncoder.encode(rawPassword));
+        newUser.setRoles(roles);
 
 
         newUser.setRoles(roles);
         return userRepository.save(newUser);
     }
 
-    public User updateUser(String username, String password, Set<Role> roles) throws UserNotFoundException {
-        Optional<User> userOptional = userRepository.findByUsername(username);
-        if (userOptional.isEmpty()) {
-            throw new UserNotFoundException("User not found with username: " + username);
+    public User updateUser(String username, String newPassword, Set<Role> newRoles) throws UserNotFoundException {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+
+        if (newRoles != null && !newRoles.isEmpty()) {
+            user.setRoles(newRoles);
         }
 
-        User userToUpdate = userOptional.get();
-        if (password != null && !password.isEmpty()) {
-            userToUpdate.setPassword(password);
-        }
-
-        if (roles != null && !roles.isEmpty()) {
-            userToUpdate.setRoles(roles);
-        }
-
-        return userRepository.save(userToUpdate);
+        return userRepository.save(user);
     }
 
     public void deleteUserByUsername(String username) {
-
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-
         userRepository.deleteByUsername(username);
 
     }
 
-    public void assignAdmin(User user) {
-        Role adminRole = roleService.findByName("ROLE_ADMIN")
-                .orElseThrow(() -> new IllegalStateException("ROLE_ADMIN not found"));
-
-
-        Set<Role> updatedRoles = new java.util.HashSet<>(Set.copyOf(user.getRoles()));
-        updatedRoles.add(adminRole);
-        user.setRoles(updatedRoles);
-
-        userRepository.save(user);
-    }
 }
 
 

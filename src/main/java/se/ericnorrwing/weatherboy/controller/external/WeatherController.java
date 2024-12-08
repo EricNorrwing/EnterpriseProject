@@ -41,17 +41,8 @@ public class WeatherController {
         return ResponseEntity.ok(weatherDetails);
     }
 
-    @GetMapping("/test")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public Flux<WeatherDetails> getTestWeather() {
-        return externalWeatherService.getWeatherByLocationName("Stockholm");
-    }
 
-    @GetMapping("/test/user")
-    @PreAuthorize("hasRole('SCOPE_read:user')")
-    public String testUsers (Authentication authentication) {
-        return authentication.getAuthorities().toString();
-    }
+
 
 
 

@@ -9,5 +9,7 @@ public record ConfigProperties(
         String externalWeatherApiKey,
         String postGresUsername,
         String postGresPassword,
-        String postGresDBName
+        String postGresDBName,
+        String JwtSecretPrivateKey,
+        String JwtSecretPublicKey
 ) {}

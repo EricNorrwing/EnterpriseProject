@@ -39,3 +39,4 @@ out/
 #Security
 *.env
 /src/main/resources/secrets.properties
+/src/main/resources/certs/*

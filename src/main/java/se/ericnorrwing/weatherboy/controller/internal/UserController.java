@@ -19,20 +19,12 @@ public class UserController {
 
     private final UserService userService;
 
-    //TODO REMOVE?
-    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/test")
-    public String testPasswordHashing() {
-        String plainPassword = "any12345";
-        String hashedPassword = passwordEncoder.encode(plainPassword);
-        return "Plain password: " + plainPassword + "\nHashed password: " + hashedPassword;
-    }
 
     @PostMapping("/create")
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
