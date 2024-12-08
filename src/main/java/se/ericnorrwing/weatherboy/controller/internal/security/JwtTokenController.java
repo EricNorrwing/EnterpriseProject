@@ -5,12 +5,14 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import se.ericnorrwing.weatherboy.model.internal.dto.JwtResponse;
 import se.ericnorrwing.weatherboy.model.internal.dto.LoginRequest;
 import se.ericnorrwing.weatherboy.model.internal.dto.UserDTO;
 import se.ericnorrwing.weatherboy.service.internal.security.JwtTokenService;
 
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -49,4 +51,6 @@ public class JwtTokenController {
             return ResponseEntity.status(401).body("Invalid credentials: " + e.getMessage());
         }
     }
+
+
 }

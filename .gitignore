@@ -40,3 +40,5 @@ out/
 *.env
 /src/main/resources/secrets.properties
 /src/main/resources/certs/*
+/src/main/resources/schema.sql
+/src/main/resources/data.sql

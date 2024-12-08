@@ -17,10 +17,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.*;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationEntryPoint;
 import org.springframework.security.oauth2.server.resource.web.access.BearerTokenAccessDeniedHandler;
 import org.springframework.security.web.SecurityFilterChain;
@@ -40,18 +42,13 @@ public class SecurityConfiguration {
 
     private final UserDetailsService userDetailsService;
 
-
-
     public SecurityConfiguration(UserDetailsService userDetailsService) {
-            this.userDetailsService = userDetailsService;
+        this.userDetailsService = userDetailsService;
     }
-
 
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-
-                //TODO CSRF
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
@@ -59,10 +56,11 @@ public class SecurityConfiguration {
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .exceptionHandling(
-                        (ex) -> ex.authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
-                                .accessDeniedHandler(new BearerTokenAccessDeniedHandler()))
-                .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()))
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
+                        .accessDeniedHandler(new BearerTokenAccessDeniedHandler())
+                )
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())))
                 .userDetailsService(userDetailsService);
 
         return http.build();
@@ -77,17 +75,26 @@ public class SecurityConfiguration {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
     @Bean
     public JwtDecoder jwtDecoder() throws Exception {
-
         PublicKey publicKey = JwtKeyLoader.loadPublicKey();
-
-
         RSAPublicKey rsaPublicKey = (RSAPublicKey) publicKey;
-
-
         return NimbusJwtDecoder.withPublicKey(rsaPublicKey).build();
     }
 
+    @Bean
+    public JwtAuthenticationConverter jwtAuthenticationConverter() {
+        JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
 
+
+        converter.setJwtGrantedAuthoritiesConverter(jwt -> {
+            String roles = jwt.getClaim("roles");
+            return roles != null
+                    ? AuthorityUtils.commaSeparatedStringToAuthorityList(roles)
+                    : AuthorityUtils.NO_AUTHORITIES;
+        });
+
+        return converter;
+    }
 }

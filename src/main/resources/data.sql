@@ -9,7 +9,7 @@ SELECT 'ROLE_USER'
 
 
 INSERT INTO users (username, password)
-SELECT 'EricN', '{bcrypt}$2a$10$IJExffhAajOQyHY.RdUHIu35bnR5AJWgbQ3jCAitLu9FtHXrlz5by'
+SELECT 'EricN', '{bcrypt}$2a$12$WilQZWYbRzHEuDCDMsEdneDpTey4Rw/K.b4GiLJUgBeZ8ykTxFINW'
     WHERE NOT EXISTS (SELECT 1 FROM users WHERE username = 'EricN');
 
 

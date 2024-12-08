@@ -42,6 +42,14 @@ public class WeatherController {
     }
 
 
+    //TODO
+    @GetMapping("/test")
+    public ResponseEntity<Flux<WeatherDetails>> getStockholmWeather() {
+        String cityName = "Stockholm";
+        Flux<WeatherDetails> weatherDetails = externalWeatherService.getWeatherByLocationName(cityName);
+        return ResponseEntity.ok(weatherDetails);
+    }
+
 
 
 
