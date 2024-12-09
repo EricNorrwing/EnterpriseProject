@@ -22,7 +22,7 @@ public class ExternalWeatherApiService implements ExternalWeatherService {
         this.notionConfigProperties = notionConfigProperties;
     }
 
-    //TODO Convert to Coords
+
 
     @Override
     public Flux<WeatherDetails> getWeatherByLocationName(String cityName) {
